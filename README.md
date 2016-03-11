@@ -16,5 +16,7 @@ I'd clean up stuff like that but the tool will be usesless in a few days when Dr
 I'm not going to provide a binary (pre compiled) to download. 
 If someone else wants to, that's great. 
 
+To use, compile the solution using either Visual Studio or csc, find the exe, run it. 
+
 Enjoy, 
 R
