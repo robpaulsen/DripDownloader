@@ -161,7 +161,7 @@ namespace DripDownloader
                         {
                             responseMessage.Content.CopyToAsync(f).Wait();
                         }
-                        File.Move(tempName, fname);
+                        File.Move(tempName, newFile);
                         Console.WriteLine("Successfully saved: " + fname);
 
                     }
