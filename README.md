@@ -3,7 +3,7 @@ A quick and dirty tool to grab all available downloads from Drip before they shu
 
 Works for me, may not work for you.
 May destroy your computer (shouldn't, but you've been warned). 
-Only downloads releases that have a FLAC download option. 
+Tries to download one copy of each release in the following priority order: flac, wav, mp3, aiff
 
 Usage: dripdownloader emailaddress password path
 

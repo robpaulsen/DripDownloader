@@ -98,7 +98,11 @@ namespace DripDownloader
                 var counter = 0;
                 foreach (var release in releases)
                 {
-                    TryGetRelease(saveFolder, release.Item1, release.Item2, c);
+                    if (!TryGetRelease(saveFolder, release.Item1, release.Item2, c, "flac")) 
+                     if (!TryGetRelease(saveFolder, release.Item1, release.Item2, c, "wav"))
+                      if (!TryGetRelease(saveFolder, release.Item1, release.Item2, c, "mp3")) 
+                       if (!TryGetRelease(saveFolder, release.Item1, release.Item2, c, "aiff")) continue;
+
                     counter ++;
                     Console.WriteLine("Done {0} of {1} --- {2}%", counter, totalCount, counter*100/totalCount);
                 }
@@ -113,13 +117,13 @@ namespace DripDownloader
         }
      
 
-        private static void TryGetRelease(string saveFolder, int dripId, int releaseId, HttpClient c)
+        private static bool TryGetRelease(string saveFolder, int dripId, int releaseId, HttpClient c, string format)
         {
             
 
             Console.WriteLine("Attempting to Download: Drip {0} Release {1}",dripId, releaseId);
 
-            var requestUri = string.Format("/api/creatives/{0}/releases/{1}/download?release_format=flac", dripId,releaseId);
+            var requestUri = string.Format("/api/creatives/{0}/releases/{1}/download?release_format={2}", dripId,releaseId,format);
 
            
             var g = c.GetAsync(requestUri, HttpCompletionOption.ResponseHeadersRead);
@@ -131,9 +135,9 @@ namespace DripDownloader
                 {
                     if (responseMessage.StatusCode != HttpStatusCode.OK)
                     {
-                        Console.WriteLine("Drip {0} Release {1} No Good: {2}", dripId, releaseId,
-                            responseMessage.StatusCode);
-                        return;
+                        Console.WriteLine("Drip {0} Release {1} in {3} No Good: {2}", dripId, releaseId,
+                            responseMessage.StatusCode, format);
+                        return false;
                     }
 
                     var fname = Path.GetFileName(responseMessage.RequestMessage.RequestUri.LocalPath);
@@ -149,7 +153,7 @@ namespace DripDownloader
                     if (File.Exists(newFile))
                     {
                         Console.WriteLine("Already Have: " + fname);
-                        return;
+                        return true;
                     }
                
 
@@ -163,16 +167,18 @@ namespace DripDownloader
                         }
                         File.Move(tempName, newFile);
                         Console.WriteLine("Successfully saved: " + fname);
-
+                        return true;
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine("UnSuccessfully saved: " + fname + " :: " + ex.Message);
+                        return true; //try again later
                     }
                 }
-              
+                
             });
-            postG.Wait();
+          
+            return postG.Result;
         }
     }
 }
