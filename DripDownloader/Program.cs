@@ -31,7 +31,7 @@ namespace DripDownloader
 
             var saveFolder = args[2]; //@"Y:\drip\";
 
-            Console.WriteLine("Starting Scan...");
+       
 
 
             var cc = new CookieContainer();
@@ -60,7 +60,9 @@ namespace DripDownloader
                     Console.WriteLine("Failed initial get.");
                     return;
                 }
-
+                
+                Console.WriteLine("Logging in...");
+                
                 var body = string.Format(@"{{""email"":""{0}"",""password"":""{1}""}}", userName, password);
                 
                  
@@ -79,7 +81,7 @@ namespace DripDownloader
                 var releases = new List<Tuple<int, int>>();
                 for (var i = 1; i < 100; i++)
                 {
-                    Console.WriteLine("Looking for Releases: " + i);
+                    Console.WriteLine("Fetching release list page: " + i);
                     var page = c.GetStringAsync(string.Format("/api/users/{1}/releases?page={0}", i, userid)).Result;
                     bool found=false;
                     foreach (Match match in Regex.Matches(page, @"""id"":(?<release>[^,]+),""creative_id"":(?<dripid>[^,]+),"""))
@@ -91,10 +93,14 @@ namespace DripDownloader
                     }
                     if (!found) break;
                 }
-                Console.WriteLine("Found Releases: " + releases.Count);
+                var totalCount = releases.Count;
+                Console.WriteLine("Found Releases: " + totalCount);
+                var counter = 0;
                 foreach (var release in releases)
                 {
                     TryGetRelease(saveFolder, release.Item1, release.Item2, c);
+                    counter ++;
+                    Console.WriteLine("Done {0} of {1} --- {2}%", counter, totalCount, counter*100/totalCount);
                 }
 
 
@@ -116,8 +122,7 @@ namespace DripDownloader
             var requestUri = string.Format("/api/creatives/{0}/releases/{1}/download?release_format=flac", dripId,releaseId);
 
            
-            var g =
-                c.GetAsync(requestUri, HttpCompletionOption.ResponseHeadersRead);
+            var g = c.GetAsync(requestUri, HttpCompletionOption.ResponseHeadersRead);
 
 
            var postG = g.ContinueWith((resp) =>
@@ -133,12 +138,14 @@ namespace DripDownloader
 
                     var fname = Path.GetFileName(responseMessage.RequestMessage.RequestUri.LocalPath);
 
+                   
 
-                    
                     var dir = Path.Combine(saveFolder, dripId.ToString()).ToString();
                     Directory.CreateDirectory(dir);
                     var newFile = Path.Combine(dir, fname);
 
+                    var tempName = newFile + ".temp";
+                    
                     if (File.Exists(newFile))
                     {
                         Console.WriteLine("Already Have: " + fname);
@@ -152,11 +159,12 @@ namespace DripDownloader
                     using (
                         var f =
                             new FileStream(
-                              newFile, FileMode.Create))
+                              tempName, FileMode.Create))
                     {
                         try
                         {
                             responseMessage.Content.CopyToAsync(f).Wait();
+                            File.Move(tempName,fname);
                             Console.WriteLine("Successfully saved: " + fname);
                         }
                         catch (Exception ex)
