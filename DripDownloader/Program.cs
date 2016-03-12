@@ -155,22 +155,19 @@ namespace DripDownloader
 
                     Console.WriteLine("Attempting to save: " + fname);
 
-
-                    using (
-                        var f =
-                            new FileStream(
-                              tempName, FileMode.Create))
+                    try
                     {
-                        try
+                        using (var f =new FileStream(tempName, FileMode.Create))
                         {
                             responseMessage.Content.CopyToAsync(f).Wait();
-                            File.Move(tempName,fname);
-                            Console.WriteLine("Successfully saved: " + fname);
                         }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine("UnSuccessfully saved: " + fname + " :: " + ex.Message);
-                        }
+                        File.Move(tempName, fname);
+                        Console.WriteLine("Successfully saved: " + fname);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("UnSuccessfully saved: " + fname + " :: " + ex.Message);
                     }
                 }
               
