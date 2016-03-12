@@ -6,6 +6,7 @@ May destroy your computer (shouldn't, but you've been warned).
 Only downloads releases that have a FLAC download option. 
 
 Usage: dripdownloader emailaddress password path
+
 Example: dripdownloader me@place.com bAdPAssW0d C:\dripbackup\
 
 It will take a while to download everything. You can stop and restart it, and it will skip things it's already fetched.
