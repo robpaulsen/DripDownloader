@@ -4,5 +4,12 @@ namespace DripDownloader
     {
         public int DripId { get; set; }
         public int ReleaseId { get; set; }
+
+        public override string ToString()
+        {
+         
+            return DripId + ":" + ReleaseId;
+        
+        }
     }
 }
