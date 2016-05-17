@@ -68,10 +68,10 @@ namespace DripDownloader
 
             var c = new HttpClient(h);
 
-            var baseAddy = new Uri("https://drip.com");
+            var baseAddy = new Uri("https://drip.kickstarter.com");
             c.BaseAddress = baseAddy;
             c.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-            c.DefaultRequestHeaders.Host = "drip.com";
+            c.DefaultRequestHeaders.Host = "drip.kickstarter.com";
             c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
 
 
