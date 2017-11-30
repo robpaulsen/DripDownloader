@@ -14,7 +14,7 @@ namespace DripDownloader
 
             if (args.Length != 3)
             {
-                Console.WriteLine("Usage: dripdownloader.exe USERNAME PASSWORD FULLPATHTOSAVETO");
+                Console.WriteLine("Usage: dripget USERNAME PASSWORD FULLPATHTOSAVETO");
                 return;
             }
 
