@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 15.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DripDownloader", "DripDownloader\DripDownloader.csproj", "{70908F45-7720-461A-B251-69F5CE1B1ADF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dripget", "dripget\dripget.csproj", "{CF20343F-5965-4BF8-B67C-BC26814A126E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{70908F45-7720-461A-B251-69F5CE1B1ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70908F45-7720-461A-B251-69F5CE1B1ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70908F45-7720-461A-B251-69F5CE1B1ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70908F45-7720-461A-B251-69F5CE1B1ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF20343F-5965-4BF8-B67C-BC26814A126E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF20343F-5965-4BF8-B67C-BC26814A126E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF20343F-5965-4BF8-B67C-BC26814A126E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF20343F-5965-4BF8-B67C-BC26814A126E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		version = 0.2
 	EndGlobalSection
 EndGlobal

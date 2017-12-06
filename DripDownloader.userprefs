@@ -1,10 +1,20 @@
-﻿<Properties StartupConfiguration="{70908F45-7720-461A-B251-69F5CE1B1ADF}|Default">
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupConfiguration="{CF20343F-5965-4BF8-B67C-BC26814A126E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="dripget/dripget.csproj.user">
+    <Files>
+      <File FileName="dripget/Program.cs" Line="23" Column="1" />
+      <File FileName="dripget/Fetcher.cs" Line="20" Column="35" />
+      <File FileName="dripget/dripget.csproj" Line="10" Column="1" />
+      <File FileName="dripget/dripget.csproj.user" Line="8" Column="11" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/X/dev/DripDownloader/dripget/Fetcher.cs" relfile="dripget/Fetcher.cs" line="49" column="1" />
+      <Breakpoint file="/Users/X/dev/DripDownloader/dripget/Program.cs" relfile="dripget/Program.cs" line="23" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.DripDownloader PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.dripget PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

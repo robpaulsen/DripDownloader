@@ -52,7 +52,7 @@ namespace DripDownloader
                 foreach (var release in missingReleases)
                 {
                     if (f.GetRelease(saveFolder, release)) newlyAquired.Add(release);
-
+                    AppendFetched(saveFolder,release);
                     counter++;
                     Console.WriteLine("Done {0} of {1} --- {2}%", counter, missingReleases.Count, counter * 100 / missingReleases.Count);
                 }
@@ -76,6 +76,14 @@ namespace DripDownloader
 
             var path = Path.Combine(saveFolder, "fetched.txt");
             File.WriteAllLines(path, alreadyFetched.Select(r => r.ToString()));
+
+        }
+
+        private static void AppendFetched(string saveFolder, Release newlyFetched)
+        {
+
+            var path = Path.Combine(saveFolder, "fetched.txt");
+            File.AppendAllLines(path, new[] { newlyFetched.ToString() });
 
         }
 
